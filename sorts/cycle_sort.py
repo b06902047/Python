@@ -8,13 +8,10 @@ def cycle_sort(array: list) -> list:
     """
     >>> cycle_sort([4, 3, 2, 1])
     [1, 2, 3, 4]
-
     >>> cycle_sort([-4, 20, 0, -50, 100, -1])
     [-50, -4, -1, 0, 20, 100]
-
     >>> cycle_sort([-.1, -.2, 1.3, -.8])
     [-0.8, -0.2, -0.1, 1.3]
-
     >>> cycle_sort([])
     []
     """
@@ -29,7 +26,12 @@ def cycle_sort(array: list) -> list:
 
         if pos == cycle_start:
             continue
-
+        
+        """
+        the place that the current element should be 
+        switched to are already occupied by element with
+        same value
+        """
         while item == array[pos]:
             pos += 1
 
@@ -39,7 +41,11 @@ def cycle_sort(array: list) -> list:
             for i in range(cycle_start + 1, array_len):
                 if array[i] < item:
                     pos += 1
-
+            """
+            In the second turn of switching, the place that 
+            the current element should be switched to are already
+            occupied by element with same value
+            """
             while item == array[pos]:
                 pos += 1
 
@@ -49,5 +55,7 @@ def cycle_sort(array: list) -> list:
 
 
 if __name__ == "__main__":
+    assert cycle_sort([3, 3, 3, 3, 2]) == [2, 3, 3, 3, 3]
+    assert cycle_sort([3, 2, 3, 3, 3, 2, 1]) == [1, 2, 2, 3, 3, 3, 3]
     assert cycle_sort([4, 5, 3, 2, 1]) == [1, 2, 3, 4, 5]
     assert cycle_sort([0, 1, -10, 15, 2, -2]) == [-10, -2, 0, 1, 2, 15]
